@@ -121,7 +121,7 @@ switch:
     icon: mdi:television-shimmer
     optimistic: true
     on_turn_on:
-      - light.turn_off: LEDSECONDARY
+      - light.turn_off: LEDDISPLAY
 
   - platform: template
     name: State_Ducking
