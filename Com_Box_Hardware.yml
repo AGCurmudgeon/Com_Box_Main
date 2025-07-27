@@ -38,7 +38,7 @@ microphone:
 
 output:
   - platform: ledc
-    pin: ${BKLT}
+    pin: ${BCKLT}
     id: backlight_pwm
 
 spi:
