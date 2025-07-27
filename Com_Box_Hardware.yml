@@ -1,0 +1,211 @@
+mcp23017:
+  - id: 'expander'
+    address: 0x20
+
+i2c:
+  sda: ${I2C_SDA}
+  scl: ${I2C_SCL}
+  scan: false
+  id: i2cBUS
+
+i2s_audio:
+  i2s_lrclk_pin: ${LRCLOCK}
+  i2s_bclk_pin: ${BCLOCK}
+
+speaker:
+  - platform: i2s_audio
+    dac_type: external
+    i2s_dout_pin:   
+      number: ${SPEAKER}
+    id: 'speaker_primary'
+
+
+media_player:
+  - platform: speaker
+    name: "media_out"
+    id: media_out
+    announcement_pipeline:
+      speaker: 'speaker_primary'
+      format: WAV
+
+microphone:
+  - platform: i2s_audio
+    adc_type: external
+    i2s_din_pin: ${MIC}
+    pdm: False
+    channel: left
+    id: 'mic'
+
+output:
+  - platform: ledc
+    pin: ${BKLT}
+    id: backlight_pwm
+
+spi:
+  - id: SPI_LCD
+    clk_pin: ${LCD_CLK}
+    mosi_pin: ${LCD_MOSI}
+    miso_pin: ${LCD_MISO}
+    interface: ${LCD_INTERFACE}
+  - id: SPI_LED
+    clk_pin: ${LED_CLK}
+    mosi_pin: ${LED_MOSI}
+    interface: ${LED_INTERFACE}
+
+display:
+  - platform: ${LCD_PLATFORM}
+    spi_id: 'SPI_LCD'
+    model: ${LCD_MODEL}
+    dc_pin: ${LCD_DC}
+    reset_pin: ${LCD_RESET}
+    cs_pin: ${LCD_CS}
+    invert_colors: false
+    show_test_card: false
+    rotation: ${LCD_ROTATION}
+    dimensions:
+      height: ${LCD_HEIGHT}
+      width: ${LCD_WIDTH}
+
+light:
+
+  - platform: spi_led_strip
+    spi_id: 'SPI_LED'
+    num_leds: ${LED_NUM}
+    id: "spi_led_hardware"
+    restore_mode: ALWAYS_ON
+    internal: True
+  
+  - platform: monochromatic
+    output: backlight_pwm
+    name: "Display Backlight"
+    id: back_light
+    restore_mode: ALWAYS_ON
+
+  - platform: partition
+    name: "LED_BACK"
+    id: LEDBACK
+    segments:
+      - id: spi_led_hardware
+        from: ${LED_BACK_START}
+        to: ${LED_BACK_END}
+
+  - platform: partition
+    name: "LED_DISPLAY"
+    id: LEDDISPLAY
+    segments:
+      - id: spi_led_hardware
+        from: ${LED_DISPLAY_START}
+        to: ${LED_DISPLAY_END}
+
+
+switch:
+  - platform: gpio
+    name: "Com_Indicator"
+    id: Com_Light
+    pin:
+      mcp23xxx: 'expander'
+      number: ${EXP_LAMP_IND_PIN}
+      mode:
+        output: true
+      inverted: false
+
+  - platform: template
+    name: State_Alarming
+    id: Alarming_Switch
+    icon: mdi:television-shimmer
+    optimistic: true
+
+  - platform: template
+    name: State_Muted
+    id: Mute_On
+    icon: mdi:television-shimmer
+    optimistic: true
+    on_turn_on:
+      - light.turn_off: LEDSECONDARY
+
+  - platform: template
+    name: State_Ducking
+    id: ducking
+    icon: mdi:television-shimmer
+    optimistic: true
+
+  - platform: template
+    name: State_DoorBell
+    id: Door_Bell
+    icon: mdi:television-shimmer
+    optimistic: true
+
+  - platform: template
+    name: State_AirBad
+    id: Air_Bad
+    icon: mdi:television-shimmer
+    optimistic: true
+
+  - platform: template
+    name: State_RainLater
+    id: Rain_Later
+    icon: mdi:television-shimmer
+    optimistic: true
+
+  - platform: template
+    name: State_FeederOut
+    id: Feeder_Out
+    icon: mdi:television-shimmer
+    optimistic: true
+
+  - platform: template
+    name: State_Texted
+    id: Texted_On
+    icon: mdi:television-shimmer
+    optimistic: true   
+
+  - platform: gpio
+    pin: 
+      number: ${SPEAKER_SIDE_PULLUP}
+    id: speaker_left_high
+    name: "speaker_left_high"
+    inverted: true
+    internal: true
+
+binary_sensor:
+  - platform: status
+    name: Status sensor
+
+  - platform: gpio
+    name: "Button A"
+    id: 'button_A'
+    pin:
+      mcp23xxx: 'expander'
+      number: ${EXP_BUTTON_A_PIN}
+      mode:
+        input: true
+        pullup: true
+      inverted: true
+    filters:
+      - delayed_on: 50ms
+
+  - platform: gpio
+    name: "Button B"
+    id: 'button_B'
+    pin:
+      mcp23xxx: 'expander'
+      number: ${EXP_BUTTON_B_PIN}
+      mode:
+        input: true
+        pullup: true
+      inverted: true
+    filters:
+      - delayed_on: 50ms
+
+  - platform: gpio
+    name: "Button C"
+    id: 'button_C'
+    pin:
+      mcp23xxx: 'expander'
+      number: ${EXP_BUTTON_C_PIN}
+      mode:
+        input: true
+        pullup: true
+      inverted: true
+    filters:
+      - delayed_on: 50ms
