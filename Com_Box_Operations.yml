@@ -110,12 +110,12 @@ lvgl:
 
 switch:
     - platform: template
-        name: Antiburn
-        id: switch_antiburn
-        icon: mdi:television-shimmer
-        optimistic: true
-        entity_category: "config"
-        turn_on_action:
+      name: Antiburn
+      id: switch_antiburn
+      icon: mdi:television-shimmer
+      optimistic: true
+      entity_category: "config"
+      turn_on_action:
         - logger.log: "Starting Antiburn"
         - if:
             condition: lvgl.is_paused
@@ -124,7 +124,7 @@ switch:
                 - lvgl.widget.redraw:
         - lvgl.pause:
             show_snow: true
-        turn_off_action:
+      turn_off_action:
         - logger.log: "Stopping Antiburn"
         - if:
             condition: lvgl.is_paused
