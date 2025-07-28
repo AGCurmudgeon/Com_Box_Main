@@ -83,6 +83,13 @@ binary_sensor:
             then:
               - voice_assistant.stop:
             else:
+              - homeassistant.service:
+                  service: media_player.play_media
+                  priority: true
+                  data:
+                    media_content_id: media-source://media_source/local/sounds/tos_chirp_2.mp3
+                    media_content_type: audio/mp3
+                    entity_id: media_player.doorcom_media_out
               - voice_assistant.start:
                     
 # Screen
