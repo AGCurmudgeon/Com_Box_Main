@@ -143,18 +143,18 @@ switch:
     icon: mdi:television-shimmer
     optimistic: true   
 
-  # - id: !extend Com_Light
-  #   on_turn_on:
-  #     - switch.turn_on: ducking
-  #     - light.turn_on:
-  #         id: LEDDISPLAY
-  #         brightness: 70%
-  #         red: 100%
-  #         green: 80%
-  #         blue: 0%
-  #         effect: Slow_Pulse
-  #   on_turn_off:
-  #     - switch.turn_off: ducking
+  - id: !extend Com_Light
+    on_turn_on:
+      - switch.turn_on: ducking
+      - light.turn_on:
+          id: LEDDISPLAY
+          brightness: 70%
+          red: 100%
+          green: 80%
+          blue: 0%
+          effect: Slow_Pulse
+    on_turn_off:
+      - switch.turn_off: ducking
       
   - platform: template
     name: Antiburn
