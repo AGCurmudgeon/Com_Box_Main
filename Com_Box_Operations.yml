@@ -90,6 +90,7 @@ binary_sensor:
               - lambda: id(va).set_use_wake_word(false);
             else:
               - voice_assistant.start:
+              
 #software Switch Options
 switch:
   - platform: template
