@@ -92,41 +92,91 @@ binary_sensor:
               - voice_assistant.start:
 #software Switch Options
 switch:
-    - id: !extend Com_Light
-      on_turn_on:
-        - switch.turn_on: ducking
-        - light.turn_on:
-            id: LEDDISPLAY
-            brightness: 70%
-            red: 100%
-            green: 80%
-            blue: 0%
-            effect: Slow_Pulse
-      on_turn_off:
-        - switch.turn_off: ducking
-        
-    - platform: template
-      name: Antiburn
-      id: switch_antiburn
+  - platform: template
+      name: State_Alarming
+      id: Alarming_Switch
       icon: mdi:television-shimmer
       optimistic: true
-      entity_category: "config"
-      turn_on_action:
-        - logger.log: "Starting Antiburn"
-        - if:
-            condition: lvgl.is_paused
-            then:
-                - lvgl.resume:
-                - lvgl.widget.redraw:
-        - lvgl.pause:
-            show_snow: true
-      turn_off_action:
-        - logger.log: "Stopping Antiburn"
-        - if:
-            condition: lvgl.is_paused
-            then:
-                - lvgl.resume:
-                - lvgl.widget.redraw:
+  
+  - platform: template
+    name: State_Muted
+    id: Mute_On
+    icon: mdi:television-shimmer
+    optimistic: true
+    on_turn_on:
+      - light.turn_off: LEDDISPLAY
+
+  - platform: template
+    name: State_Ducking
+    id: ducking
+    icon: mdi:television-shimmer
+    optimistic: true
+
+  - platform: template
+    name: State_DoorBell
+    id: Door_Bell
+    icon: mdi:television-shimmer
+    optimistic: true
+
+  - platform: template
+    name: State_AirBad
+    id: Air_Bad
+    icon: mdi:television-shimmer
+    optimistic: true
+
+  - platform: template
+    name: State_RainLater
+    id: Rain_Later
+    icon: mdi:television-shimmer
+    optimistic: true
+
+  - platform: template
+    name: State_FeederOut
+    id: Feeder_Out
+    icon: mdi:television-shimmer
+    optimistic: true
+
+  - platform: template
+    name: State_Texted
+    id: Texted_On
+    icon: mdi:television-shimmer
+    optimistic: true   
+
+  - id: !extend Com_Light
+    on_turn_on:
+      - switch.turn_on: ducking
+      - light.turn_on:
+          id: LEDDISPLAY
+          brightness: 70%
+          red: 100%
+          green: 80%
+          blue: 0%
+          effect: Slow_Pulse
+    on_turn_off:
+      - switch.turn_off: ducking
+      
+  - platform: template
+    name: Antiburn
+    id: switch_antiburn
+    icon: mdi:television-shimmer
+    optimistic: true
+    entity_category: "config"
+    turn_on_action:
+      - logger.log: "Starting Antiburn"
+      - if:
+          condition: lvgl.is_paused
+          then:
+              - lvgl.resume:
+              - lvgl.widget.redraw:
+      - lvgl.pause:
+          show_snow: true
+    turn_off_action:
+      - logger.log: "Stopping Antiburn"
+      - if:
+          condition: lvgl.is_paused
+          then:
+              - lvgl.resume:
+              - lvgl.widget.redraw:
                 
 # Screen
 lvgl:
