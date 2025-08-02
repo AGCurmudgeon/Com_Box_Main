@@ -43,6 +43,8 @@ binary_sensor:
       then:
         - homeassistant.service:
             service: script.coms_tone
+         - homeassistant.service:
+            service: script.coms_ack_all
     - timing:
         - ON for at least 1.5s
       then:
@@ -54,6 +56,8 @@ binary_sensor:
       then:
         - homeassistant.service:
             service: script.coms_tone
+         - homeassistant.service:
+            service: script.coms_ack
 
   - id: !extend button_C
     on_multi_click:
