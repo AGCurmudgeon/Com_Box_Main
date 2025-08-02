@@ -145,6 +145,7 @@ switch:
 
   - id: !extend Com_Light
     turn_on_action:
+      - light.turn_on: led_back
       - switch.turn_on: ducking
       - light.turn_on:
           id: LEDDISPLAY
