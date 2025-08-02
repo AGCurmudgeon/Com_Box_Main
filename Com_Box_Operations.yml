@@ -56,7 +56,7 @@ binary_sensor:
       then:
         - homeassistant.service:
             service: script.coms_tone
-         - homeassistant.service:
+        - homeassistant.service:
             service: script.coms_ack
 
   - id: !extend button_C
