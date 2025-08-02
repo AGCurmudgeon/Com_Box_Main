@@ -144,7 +144,7 @@ switch:
     optimistic: true   
 
   - id: !extend Com_Light
-    on_turn_on:
+    turn_on_action:
       - switch.turn_on: ducking
       - light.turn_on:
           id: LEDDISPLAY
@@ -153,7 +153,7 @@ switch:
           green: 80%
           blue: 0%
           effect: Slow_Pulse
-    on_turn_off:
+    turn_off_action:
       - switch.turn_off: ducking
       
   - platform: template
