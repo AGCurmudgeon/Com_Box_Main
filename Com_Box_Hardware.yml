@@ -67,7 +67,6 @@ display:
       width: ${LCD_WIDTH}
 
 light:
-
   - platform: spi_led_strip
     spi_id: 'SPI_LED'
     num_leds: ${LED_NUM}
@@ -107,8 +106,7 @@ switch:
       number: ${EXP_LAMP_IND_PIN}
       mode:
         output: true
-        inverted: false
-        optimistic: true
+      inverted: false
     on_turn_on:
       - light.turn_on: LED_BACK
       
