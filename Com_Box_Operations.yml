@@ -117,8 +117,9 @@ lvgl:
         shadow_opa: TRANSP
 
 switch:
-  
-    - platform: template
+    # - id: !extend Com_Light
+    #   turn
+      - platform: template
       name: State_Alarming
       id: Alarming_Switch
       icon: mdi:television-shimmer
