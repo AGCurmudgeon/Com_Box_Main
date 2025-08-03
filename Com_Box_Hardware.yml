@@ -107,14 +107,14 @@ switch:
       mode:
         output: true
       inverted: false
-    on_turn_on:
-      - light.turn_on: LEDBACK
-          brightness: 70%
-          red: 100%
-          green: 80%
-          blue: 0%
-    on_turn_off:
-      - light.turn_off: LEDBACK
+    # on_turn_on:
+    #   - light.turn_on: LEDBACK
+    #       brightness: 70%
+    #       red: 100%
+    #       green: 80%
+    #       blue: 0%
+    # on_turn_off:
+    #   - light.turn_off: LEDBACK
       
   - platform: gpio
     pin: 
