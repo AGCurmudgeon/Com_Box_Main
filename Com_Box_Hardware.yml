@@ -108,7 +108,7 @@ switch:
         output: true
       inverted: false
     on_turn_on:
-      - switch.turn_on: LEDBACK
+      - light.turn_on: LEDBACK
       
   - platform: gpio
     pin: 
