@@ -19,7 +19,6 @@ speaker:
       number: ${SPEAKER}
     id: 'speaker_primary'
 
-
 media_player:
   - platform: speaker
     name: "media_out"
@@ -96,7 +95,6 @@ light:
         from: ${LED_DISPLAY_START}
         to: ${LED_DISPLAY_END}
 
-
 switch:
   - platform: gpio
     name: "Com_Indicator"
@@ -109,12 +107,12 @@ switch:
       inverted: false
     on_turn_on:
       - light.turn_on: LEDBACK
-          brightness: 70%
-          red: 100%
-          green: 80%
-          blue: 0%
-    on_turn_off:
-      - light.turn_off: LEDBACK
+          # brightness: 70%
+          # red: 100%
+          # green: 80%
+          # blue: 0%
+    # on_turn_off:
+    #   - light.turn_off: LEDBACK
       
   - platform: gpio
     pin: 
