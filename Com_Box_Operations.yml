@@ -119,7 +119,7 @@ lvgl:
 switch:
     # - id: !extend Com_Light
     #   turn
-      - platform: template
+    - platform: template
       name: State_Alarming
       id: Alarming_Switch
       icon: mdi:television-shimmer
