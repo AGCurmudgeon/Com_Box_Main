@@ -108,6 +108,7 @@ switch:
       mode:
         output: true
       inverted: false
+    optimistic: true
       
   - platform: gpio
     pin: 
