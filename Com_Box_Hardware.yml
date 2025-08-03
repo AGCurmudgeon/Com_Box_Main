@@ -107,8 +107,8 @@ switch:
       number: ${EXP_LAMP_IND_PIN}
       mode:
         output: true
-      inverted: false
-    optimistic: true
+        inverted: false
+        optimistic: true
     on_turn_on:
       - light.turn_on: LED_BACK
       
