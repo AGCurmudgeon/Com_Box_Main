@@ -106,11 +106,13 @@ switch:
         output: true
       inverted: false
     on_turn_on:
-      - light.turn_on: LEDBACK
-          # brightness: 70%
-          # red: 100%
-          # green: 80%
-          # blue: 0%
+      - light.turn_on:
+          id: LEDBACK
+          brightness: 70%
+          red: 0%
+          green: 0%
+          blue: 100%
+          effect: Warp_Core
     on_turn_off:
       - light.turn_off: LEDBACK
       
